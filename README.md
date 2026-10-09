@@ -1,12 +1,12 @@
 # Stryke
 
-Site estático de acompanhamento de metas financeiras. O arquivo `index.html` contém HTML, CSS e JavaScript em um único arquivo e pode ser publicado no GitHub Pages.
+Painel web de metas financeiras, publicado no GitHub Pages. O arquivo `index.html` reúne a interface, o estilo e a lógica do cliente.
 
-## Publicar com GitHub Pages
+## Dados compartilhados
 
-1. Envie este repositório para sua conta do GitHub.
-2. No repositório, abra **Settings → Pages**.
-3. Em **Build and deployment**, escolha **Deploy from a branch**, selecione `main` e a pasta `/ (root)`.
-4. Salve. O GitHub exibirá o endereço público do site nessa página.
+O site grava saldo, metas e valores guardados em um projeto Supabase. Todos que acessam o link público conseguem visualizar e editar o mesmo conjunto de dados. A aplicação sincroniza atualizações entre visitantes a cada poucos segundos.
 
-Os dados do painel são guardados no `localStorage` do navegador em que o site for aberto.
+Projeto Supabase: região South America (São Paulo). O cliente usa uma chave publishable no navegador e as políticas de Row Level Security permitem o acesso público definido para este espaço compartilhado.
+
+Site: https://p4pereira.github.io/stryke/
+Repositório: https://github.com/p4pereira/stryke
