@@ -1,21 +1,21 @@
 # Stryke
 
-Painel compartilhado para acompanhar o farm de componentes, com meta de 1.000 por semana, participantes e histórico.
+Painel compartilhado para acompanhar o farm de componentes por semana e por participante.
 
 ## Recursos
 
-- Contador semanal automático de 0 a 1.000 componentes e barra de progresso.
-- Botão para encerrar a semana atual e abrir a próxima com contador zerado.
-- Total acumulado preservado entre semanas.
-- Cadastro de participantes e total farmado por pessoa na semana ativa.
-- Histórico de adições ligado à pessoa e à semana, com edição e exclusão.
-- Sincronização dos dados pelo Supabase.
+- Um contador com o total acumulado na semana selecionada.
+- Seletor para acessar semanas anteriores com adições registradas.
+- Progresso individual até 1.000 componentes: vermelho antes da meta e verde ao alcançá-la.
+- Cadastro de participantes e adições com responsável, quantidade e observação.
+- Histórico de adições da semana selecionada, com edição e exclusão.
+- Sincronização compartilhada pelo Supabase.
+
+As semanas são agrupadas automaticamente de segunda a domingo pela data das adições. Ao selecionar uma semana anterior, o contador, o progresso das pessoas e o histórico mostram os dados daquele período.
 
 ## Migração do banco
 
-Aplique `supabase/migrations/202611110004_weekly_farm_sessions.sql` no SQL Editor do projeto Supabase. Ela cria o histórico de semanas e adiciona uma referência de semana às adições existentes. Os registros anteriores são preservados; adições antigas permanecem identificadas como anteriores às semanas e não entram no contador novo.
-
-A abertura da semana é feita em uma única transação no banco, para fechar a anterior e criar a nova de forma segura. Não apague nem recrie tabelas.
+Para configurar um banco novo, aplique as migrações 003 e 004 em ordem. Ambas são aditivas e preservam registros; não apague nem recrie tabelas.
 
 Site: https://p4pereira.github.io/stryke/
 Repositório: https://github.com/p4pereira/stryke
