@@ -31,7 +31,8 @@ begin
 end
 $policies$;
 
-insert into public.stryke_farm_weeks default values
+insert into public.stryke_farm_weeks (started_at)
+select now()
 where not exists (select 1 from public.stryke_farm_weeks where closed_at is null);
 
 create or replace function public.stryke_open_new_week()
