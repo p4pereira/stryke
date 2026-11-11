@@ -1,19 +1,21 @@
 # Stryke
 
-Painel web compartilhado para acompanhar uma coleta de componentes com meta geral fixa de 1.000, meta semanal configurável e participantes do farm.
+Painel compartilhado para acompanhar o farm de componentes, com meta de 1.000 por semana, participantes e histórico.
 
 ## Recursos
 
-- Total acumulado, restante e progresso em relação à meta de 1.000.
-- Meta semanal editável, sem valor inicial até o grupo definir o total.
-- Cadastro e edição de participantes, com soma por pessoa.
-- Adições atribuídas a uma pessoa, com histórico editável e atalhos de quantidade.
+- Contador semanal automático de 0 a 1.000 componentes e barra de progresso.
+- Botão para encerrar a semana atual e abrir a próxima com contador zerado.
+- Total acumulado preservado entre semanas.
+- Cadastro de participantes e total farmado por pessoa na semana ativa.
+- Histórico de adições ligado à pessoa e à semana, com edição e exclusão.
 - Sincronização dos dados pelo Supabase.
 
-## Corrigir sincronização / migrar o banco
+## Migração do banco
 
-No SQL Editor do projeto Supabase, aplique `supabase/migrations/202611110003_sync_schema_recovery.sql`. Essa migração de recuperação pode ser executada mesmo quando as migrações anteriores foram aplicadas, não foram aplicadas ou pararam parcialmente.
+Aplique `supabase/migrations/202611110004_weekly_farm_sessions.sql` no SQL Editor do projeto Supabase. Ela cria o histórico de semanas e adiciona uma referência de semana às adições existentes. Os registros anteriores são preservados; adições antigas permanecem identificadas como anteriores às semanas e não entram no contador novo.
 
-Ela cria apenas tabelas/colunas ausentes, completa políticas ausentes e preserva todos os registros já existentes. Adições antigas mantêm sua quantidade e observação; como não tinham participante, ficam sem pessoa atribuída até serem editadas. A meta semanal começa sem valor definido.
+A abertura da semana é feita em uma única transação no banco, para fechar a anterior e criar a nova de forma segura. Não apague nem recrie tabelas.
 
-Não apague ou recrie tabelas nem execute limpeza de dados.
+Site: https://p4pereira.github.io/stryke/
+Repositório: https://github.com/p4pereira/stryke
